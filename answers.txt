@@ -1,0 +1,18 @@
+Phase II
+
+1. What is the difference between these two images?
+
+  The files themselves and the html image tags are identical apart from the 'image-1' and 'image-2' ids.  The difference is that the Javascript is appending unique version numbers to each image's source attribute by getting the current time.
+
+2. What are the implications for how these images load?
+
+  The images can be displayed without the time-based version being appended, but must be loaded into the DOM in order for the javascript code to execute properly.  In the code provided, an error is thrown because one of the scripts within the <body> tags attempts to access an element with id 'image-2', which has not yet been loaded.
+
+3. What can be done to make these images load correctly with a version number?
+  Placing the scripts that add version numbers at the end of the body section, below the image tags is a simple solution.  Alternatively, window.onload could be used for the first body script tag to ensure the image element is loaded prior to the version number script running.
+
+Phase III
+
+2. Does where you load the CSS matter?  Please explain.
+
+  Entering style declarations in the head of the document ensures that they will override any styles from a linked document, Bootstrap in this case.  The same could be achieved by linking a custom css file after the Bootstrap link tag.  

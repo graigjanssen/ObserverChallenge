@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Welcome to a Webpage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script>
+        function important()
+        {
+            // delayer();
+            renderTestVariant();
+            setArrowBtnState();
+            setArrowBtnHandlers();
+            setFormHandler();
+        }
+        window.onload = important;
+    </script>
+    <script>
+        function sleep(milliseconds) {
+          var start = new Date().getTime();
+          for (var i = 0; i < 1e7; i++) {
+            if ((new Date().getTime() - start) > milliseconds){
+              break;
+            }
+          }
+        }
+        function delayer() {
+            sleep(7000);
+        }
+        function renderTestVariant(){
+          var testGroup = assignTestGroup();
+          if (testGroup === "Variation"){
+            document.getElementById('header-bar').classList.add('header-alt');
+          }
+        }
+        function assignTestGroup(){
+          var randomNum = Math.round(Math.random());
+          return randomNum ? 'Variation' : 'Control';
+        }
+        function setFormHandler(){
+          var submitBtn = document.getElementById('email-list-submit');
+          submitBtn.addEventListener("click", handleSubmit);
+        }
+        function handleSubmit(e) {
+          e.preventDefault();
+          var input = document.getElementById('email-list-input').value;
+          var re = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+          if (re.test(input)){
+            renderSuccess();
+          } else {
+            renderError();
+          }
+        }
+        function renderSuccess() {
+          document.getElementById('email-list-form').classList.toggle('hide');
+          document.getElementById('email-list-error').classList.add('hide');
+          document.getElementById('success-msg').classList.toggle('hide');
+        }
+        function renderError() {
+          document.getElementById('email-list-input').value = ""; // Clear input field
+          document.getElementById('email-list-error').classList.remove('hide'); // Unhide error message
+        }
+        function setArrowBtnHandlers(){
+          var arrows = document.getElementsByClassName("arrow");
+          for (var i = 0; i < arrows.length; i++){
+            arrows[i].addEventListener("click", handleArrows);
+          }
+        }
+
+        function handleArrows(e) {
+          var id = e.target.id;
+          var slider = document.getElementById('slider');
+          if (id === "btn-left"){
+            if (slider.style.left){
+              slider.style.left = parseInt(slider.style.left) + 100 + "%";
+            }
+          } else {
+            if (slider.style.left){
+              slider.style.left = parseInt(slider.style.left) - 100 + "%";
+            } else {
+              slider.style.left = "-100%";
+            }
+          }
+          setArrowBtnState();
+        }
+        function setArrowBtnState() {
+          var left = document.getElementById('slider').style.left;
+          var btnL = document.getElementById('btn-left');
+          var btnR = document.getElementById('btn-right');
+          if (left == false || left === "0%"){
+            btnL.disabled = true;
+            btnR.disabled = false;
+          } else if (left === "-100%"){
+            btnL.disabled = false;
+            btnR.disabled = true;
+          } else {
+            btnL.disabled = false;
+            btnR.disabled = false;
+          }
+        }
+    </script>
+    <style media="screen" type="text/css">
+    .header {
+        background-color: #f0f0f0;
+        text-align: center;
+        padding: 16px;
+    }
+    .header-alt {
+      background-color: #111324;
+      color: #fff;
+    }
+    .header h2 {
+      margin: 0;
+    }
+    .hide {
+      display: none;
+    }
+    #slideshow-container {
+      position: relative;
+      width: 100%;
+      background-color: #222;
+      /*border: 3px solid #556;*/
+      box-shadow: 1px 1px 3px rgba(0,0,0,.7);
+      margin-bottom: 2em;
+    }
+    #slides-window {
+      position: relative;
+      height: 540px;
+      width: 90%;
+      max-width: 630px; /* Ensures image wont exceed original dimensions */
+      overflow: hidden;
+      margin: 0 auto;
+      border: 2px solid #556;
+      font-size: 0; /* Eliminates whitespace so slides fit properly */
+    }
+    #slider {
+      position: absolute;
+      left: 0px;
+      -webkit-transition: left 1s;
+      -moz-transition: left 1s;
+      -ms-transition: left 1s;
+      -o-transition: left 1s;
+      transition: left 1s;
+      width: 200%;
+    }
+    .slide {
+      position: relative;
+      display: inline-block;
+      height: 540px;
+      width: 50%;
+      max-width: 630px;
+      color: #eee;
+      font-size: 16px;
+    }
+    .slide-image {
+      position: absolute;
+      top: 0;
+    }
+    .slide-image img {
+      width: 100%;
+      max-width: 630px;
+    }
+    .image-caption {
+      position: absolute;
+      padding: 1.5em;
+      bottom: 1%;
+    }
+    #btn-left {
+      left: 0;
+    }
+    #btn-right {
+      right: 0;
+    }
+    .arrow {
+      position: absolute;
+      top: 45%;
+      font-size: 2em;
+    }
+    #like-div {
+      text-align: center;
+    }
+    #btn-like {
+      font-size: 1.75em;
+      margin: 1em 0;
+    }
+    .alert {
+      max-width: 350px;
+      padding: .5em;
+      margin-top: .25em;
+    }
+    @media (max-width: 576px){
+      .arrow {
+        font-size: 1em;
+      }
+      #btn-left {
+        left: 5%;
+      }
+      #btn-right {
+        right: 5%;
+      }
+      .image-caption {
+        bottom: 10%;
+      }
+    }
+    </style>
+  </head>
+  <body>
+
+      <script>
+          sleep(7000);
+          //alert("hoho");
+      </script>
+      <!-- Moved image version script to bottom of body -->
+
+      <div class="container">
+        <div id="header-bar" class="header">
+            <h2>Header Bar</h2>
+        </div>
+        <!-- Slideshow -->
+        <div id="slideshow-container">
+          <div id="slides-window"> <!-- Hides overflow so only current slide visible -->
+            <div id="slider"> <!-- Moves when buttons clicked -->
+              <div class="slide">
+                <div class="slide-image">
+                  <img id="image-1" src="https://s-media-cache-ak0.pinimg.com/736x/4b/fe/44/4bfe443c1db09c0943de27164783e4fc.jpg">
+                </div>
+                <div class="image-caption" id="image-1-caption">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ullamcorper ante. Quisque sit amet mauris facilisis, placerat nisl finibus, euismod felis. </p>
+                </div>
+              </div>
+              <div class="slide">
+                <div class="slide-image">
+                  <img id="image-2" src="https://s-media-cache-ak0.pinimg.com/736x/4b/fe/44/4bfe443c1db09c0943de27164783e4fc.jpg">
+                </div>
+                <div class="image-caption" id="image-2-caption">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- buttons and icons share id to allow listener to get correct id if icon clicked-->
+          <button id="btn-left" class="arrow btn btn-info"><i id="btn-left" class="fa fa-arrow-left"></i></button>
+          <button id="btn-right" class="arrow btn btn-info"><i id="btn-right" class="fa fa-arrow-right"></i></button>
+          <div id="like-div">
+            <button id="btn-like" class="btn btn-primary"><i class="fa fa-thumbs-up"></i></button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ullamcorper ante. Quisque sit amet mauris facilisis, placerat nisl finibus, euismod felis. Fusce tristique felis augue, quis ultricies augue iaculis vel. Ut volutpat orci a mauris rutrum consectetur. Curabitur consequat, dui sed tincidunt scelerisque, augue tortor vehicula turpis, porttitor viverra nulla arcu gravida magna. In auctor, ex quis rutrum iaculis, velit urna gravida ante, nec tristique mi mi eget ex. Ut eu nisl in augue dapibus consequat. Aenean faucibus blandit metus et volutpat. Sed nec dolor auctor, venenatis velit id, rhoncus ipsum. Proin congue, magna a viverra maximus, felis nisl efficitur ipsum, sit amet bibendum mauris mi sed diam.
+            </p>
+          </div>
+          <div class="col-xs-12 col-md-6">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ullamcorper ante. Quisque sit amet mauris facilisis, placerat nisl finibus, euismod felis. Fusce tristique felis augue, quis ultricies augue iaculis vel. Ut volutpat orci a mauris rutrum consectetur. Curabitur consequat, dui sed tincidunt scelerisque, augue tortor vehicula turpis, porttitor viverra nulla arcu gravida magna.
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ullamcorper ante. Quisque sit amet mauris facilisis, placerat nisl finibus, euismod felis. Fusce tristique felis augue, quis ultricies augue iaculis vel. Ut volutpat orci a mauris rutrum consectetur. Curabitur consequat, dui sed tincidunt scelerisque, augue tortor vehicula turpis, porttitor viverra nulla arcu gravida magna. In auctor, ex quis rutrum iaculis, velit urna gravida ante, nec tristique mi mi eget ex. Ut eu nisl in augue dapibus consequat. Aenean faucibus blandit metus et volutpat. Sed nec dolor auctor, venenatis velit id, rhoncus ipsum. Proin congue, magna a viverra maximus, felis nisl efficitur ipsum, sit amet bibendum mauris mi sed diam.
+            </p>
+          </div>
+          <div class="col-xs-12 col-md-6">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ullamcorper ante. Quisque sit amet mauris facilisis, placerat nisl finibus, euismod felis. Fusce tristique felis augue, quis ultricies augue iaculis vel. Ut volutpat orci a mauris rutrum consectetur. Curabitur consequat, dui sed tincidunt scelerisque, augue tortor vehicula turpis, porttitor viverra nulla arcu gravida magna.
+            </p>
+          </div>
+        </div>
+        <form id="email-list-form">
+          <input id="email-list-input" name="email" type="text">
+          <input id="email-list-submit" type="submit">
+        </form>
+        <div id="email-list-error" class="hide alert alert-danger">
+          <p>Please enter a valid email address</p>
+        </div>
+        <div id="success-msg" class="hide alert alert-success">
+          <p>Thanks for joining the email list!</p>
+        </div>
+        <div id="footer">
+            <span>CompanyName</span>
+            <ul>
+                <li><a href="">Lorem</a></li>
+                <li><a href="">Ipsumbook</a></li>
+                <li><a href="">Dolorgram</a></li>
+                <li><a href="">Magna</a></li>
+            </ul>
+        </div>
+      </div>
+
+      <script language="javascript" type="text/javascript">
+          var d = new Date();
+          document.getElementById("image-1").src =
+            "https://s-media-cache-ak0.pinimg.com/736x/4b/fe/44/4bfe443c1db09c0943de27164783e4fc.jpg?ver=" +
+             d.getTime();
+      </script>
+      <script language="javascript" type="text/javascript">
+          var d = new Date();
+          document.getElementById("image-2").src =
+            "https://s-media-cache-ak0.pinimg.com/736x/4b/fe/44/4bfe443c1db09c0943de27164783e4fc.jpg?ver=" +
+             d.getTime();
+      </script>
+  </body>
+</html>
